@@ -27,18 +27,41 @@ class FirstApp extends StatelessWidget {
     );
   }
 
-  Column buildColumn(int index) {
+  Widget buildColumn(int index) {
     return Column(
       children: [
-        Container(
-          width: double.infinity,
-          height: 50,
-          color: Colors.amber[colorCodes[index]],
-          child: Text('번호 : ${index}'),
+        ListTile(
+          title: Text('제목'),
+          subtitle: Text('부제목'),
+          leading: Icon(Icons.account_box),
+          onTap: () {
+            print('눌러짐');
+          },
         ),
-        Container(
-          height: 5,
-        )
+        Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: Container(
+                height: 1,
+                color: Colors.green,
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Icon(Icons.accessibility),
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                height: 1,
+                color: Colors.blue,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
