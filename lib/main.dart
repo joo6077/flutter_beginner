@@ -14,58 +14,34 @@ class FirstApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // CupertinoApp()
-        // AndroidApp 을 만들거예요.
-        home: SafeArea(
-      child: Scaffold(
-        // 기본 구조를 들고 있어요.
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          title: Text('First App'),
-          leading: Icon(Icons.menu),
-        ),
-        body: Container(
-          height: 100,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                width: 100,
-                color: Colors.green,
-              ),
-              Container(
-                width: 100,
-                color: Colors.red,
-              ),
-              Container(
-                width: 100,
-                color: Colors.orange,
-              ),
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: Text('button'),
-          onPressed: () {
-            print('버튼 클릭');
-          },
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-                label: 'hello',
-                icon: Icon(
-                  Icons.access_alarm_rounded,
-                )),
-            BottomNavigationBarItem(
-                label: 'hello',
-                icon: Icon(
-                  Icons.access_alarm_rounded,
-                ))
-          ],
-          backgroundColor: Colors.yellow,
+      home: SafeArea(
+        child: Scaffold(
+          body: HomeApp(),
         ),
       ),
-    ));
+    );
+  }
+}
+
+class HomeApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: how to get safearea heihgt
+    var m = MediaQuery.of(context);
+    print('넓이 : ${m.size.width}');
+    print('넓이 : ${m.size.height}');
+    print('safearea : ${m.padding.top}');
+    return Column(
+      children: [
+        Container(
+          height: (m.size.height - 24) * 0.7,
+          color: Colors.blue,
+        ),
+        Container(
+          height: (m.size.height - 24) * 0.3,
+          color: Colors.red,
+        ),
+      ],
+    );
   }
 }
