@@ -17,52 +17,20 @@ class FirstApp extends StatelessWidget {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          body: ListView.builder(
-              itemCount: 5,
-              itemBuilder: (BuildContext context, int index) {
-                return buildColumn(index);
-              }),
+          body: Container(
+            height: double.infinity,
+            width: double.infinity,
+            color: Colors.orange,
+            alignment: Alignment(1.0, 1.0),
+            child: Text.rich(TextSpan(children: [
+              TextSpan(text: '안녕'),
+              TextSpan(
+                  text:
+                      '안녕dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'),
+            ])),
+          ),
         ),
       ),
-    );
-  }
-
-  Widget buildColumn(int index) {
-    return Column(
-      children: [
-        ListTile(
-          title: Text('제목'),
-          subtitle: Text('부제목'),
-          leading: Icon(Icons.account_box),
-          onTap: () {
-            print('눌러짐');
-          },
-        ),
-        Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Container(
-                height: 1,
-                color: Colors.green,
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                child: Icon(Icons.accessibility),
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                height: 1,
-                color: Colors.blue,
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
