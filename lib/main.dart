@@ -18,16 +18,12 @@ class FirstApp extends StatelessWidget {
       home: SafeArea(
         child: Scaffold(
           body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Colors.orange,
-            alignment: Alignment(1.0, 1.0),
-            child: Text.rich(TextSpan(children: [
-              TextSpan(text: '안녕'),
-              TextSpan(
-                  text:
-                      '안녕dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'),
-            ])),
+            alignment: Alignment(1.0, 0.0),
+            child: Image.asset(
+              'assets/simson.gif',
+              width: 300,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
       ),
