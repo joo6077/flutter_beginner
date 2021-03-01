@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 void main() {
@@ -38,9 +39,81 @@ class FirstApp extends StatelessWidget {
               )
             ],
           ),
-          body: Center(),
+          body: ListView(
+            children: [
+              Container(
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              ClipOval(
+                child: Image.asset(
+                  'assets/fancy_card.jpg',
+                  width: 300,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              ClipRRect(
+                // 사진을 동그라미로 하고 싶다.
+                child: Image.asset(
+                  'assets/fancy_card.jpg',
+                  width: 300,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              ClipRect(
+                  // 사진을 네모로 자르고 싶다.
+                  child: Align(
+                child: Image.asset(
+                  'assets/fancy_card.jpg',
+                  width: 300,
+                  height: 100,
+                  fit: BoxFit.contain,
+                ),
+                heightFactor: 0.5,
+                alignment: Alignment.topCenter,
+              )),
+              ClipPath(
+                child: Image.asset(
+                  'assets/fancy_card.jpg',
+                  fit: BoxFit.fill,
+                ),
+                clipper: MyClipper(),
+              ),
+              ClipPath(
+                clipper: StarClipper(8),
+                child: Image.asset(
+                  'assets/fancy_card.jpg',
+                  fit: BoxFit.fill,
+                  height: 400,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+}
+
+class MyClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.moveTo(0, size.height);
+    path.lineTo(size.width / 2, 0.0);
+    path.lineTo(size.width, size.height);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    // TODO: implement shouldReclip
+    return true;
   }
 }
