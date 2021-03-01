@@ -17,13 +17,35 @@ class FirstApp extends StatelessWidget {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          body: Container(
-            alignment: Alignment(1.0, 0.0),
-            child: Image.asset(
-              'assets/simson.gif',
-              width: 300,
-              fit: BoxFit.contain,
-            ),
+          body: Column(
+            children: [
+              RaisedButton(
+                onPressed: () {
+                  print('raisedButton 클림됨');
+                },
+                child: Text('레이즈드버튼'),
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                padding: EdgeInsets.all(30.0),
+              ),
+              FlatButton(
+                  onPressed: () {
+                    print('FlatButton 클림됨');
+                  },
+                  color: Colors.grey,
+                  child: Text('플렛버튼')),
+              InkWell(
+                onTap: () {
+                  print('커스텀 버튼 클릭됨');
+                },
+                child: Container(
+                  color: Colors.green,
+                  child: Text('커스텀 버튼'),
+                ),
+              )
+            ],
           ),
         ),
       ),
