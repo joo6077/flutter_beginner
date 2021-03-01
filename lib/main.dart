@@ -11,36 +11,34 @@ void main() {
 
 // 저장만 하면 화면이 리로드 됨. 핫 리로드
 class FirstApp extends StatelessWidget {
+  final colorCodes = [600, 500, 400, 300, 200];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          body: HomeApp(),
+          body: ListView.builder(
+              itemCount: 5,
+              itemBuilder: (BuildContext context, int index) {
+                return buildColumn(index);
+              }),
         ),
       ),
     );
   }
-}
 
-class HomeApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: how to get safearea heihgt
-    var m = MediaQuery.of(context);
-    print('넓이 : ${m.size.width}');
-    print('넓이 : ${m.size.height}');
-    print('safearea : ${m.padding.top}');
+  Column buildColumn(int index) {
     return Column(
       children: [
         Container(
-          height: (m.size.height - 24) * 0.7,
-          color: Colors.blue,
+          width: double.infinity,
+          height: 50,
+          color: Colors.amber[colorCodes[index]],
+          child: Text('번호 : ${index}'),
         ),
         Container(
-          height: (m.size.height - 24) * 0.3,
-          color: Colors.red,
-        ),
+          height: 5,
+        )
       ],
     );
   }
