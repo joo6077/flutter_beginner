@@ -61,7 +61,7 @@ class _FirstAppState extends State<FirstApp> {
                 child: RaisedButton(
                     child: Text('전송하기'),
                     onPressed: () {
-                      print('클릭됨');
+                      print('클릭안됨');
                     }),
               ),
             ],
