@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
 void main() {
@@ -7,9 +6,16 @@ void main() {
   runApp(FirstApp()); // 비동기로 실행됨 (이벤트 루프에 등록됨)
 }
 
-// 저장만 하면 화면이 리로드 됨. 핫 리로드
-class FirstApp extends StatelessWidget {
-  final colorCodes = [600, 500, 400, 300, 200];
+// statelessWidget 한 번 그려지면 다시 안 그려짐.
+// statefulWidget 데이터 변경 시 다시 그림이 그려짐. Widget build() 함수 재실행.
+class FirstApp extends StatefulWidget {
+  @override
+  _FirstAppState createState() => _FirstAppState();
+}
+
+class _FirstAppState extends State<FirstApp> {
+  var isChecked = true;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,81 +45,29 @@ class FirstApp extends StatelessWidget {
               )
             ],
           ),
-          body: ListView(
+          body: Column(
             children: [
-              Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              ClipOval(
-                child: Image.asset(
-                  'assets/fancy_card.jpg',
-                  width: 300,
-                  height: 100,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              ClipRRect(
-                // 사진을 동그라미로 하고 싶다.
-                child: Image.asset(
-                  'assets/fancy_card.jpg',
-                  width: 300,
-                  height: 100,
-                  fit: BoxFit.contain,
-                ),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              ClipRect(
-                  // 사진을 네모로 자르고 싶다.
-                  child: Align(
-                child: Image.asset(
-                  'assets/fancy_card.jpg',
-                  width: 300,
-                  height: 100,
-                  fit: BoxFit.contain,
-                ),
-                heightFactor: 0.5,
-                alignment: Alignment.topCenter,
-              )),
-              ClipPath(
-                child: Image.asset(
-                  'assets/fancy_card.jpg',
-                  fit: BoxFit.fill,
-                ),
-                clipper: MyClipper(),
-              ),
-              ClipPath(
-                clipper: StarClipper(8),
-                child: Image.asset(
-                  'assets/fancy_card.jpg',
-                  fit: BoxFit.fill,
-                  height: 400,
-                ),
+              RaisedButton(
+                  child: Text('인증하기'),
+                  onPressed: () {
+                    print('클릭됨');
+                    setState(() {
+                      // 데이터에 연관이 있는 위젯은 다시 그려라.
+                      isChecked = false;
+                    });
+                  }),
+              AbsorbPointer(
+                absorbing: isChecked,
+                child: RaisedButton(
+                    child: Text('전송하기'),
+                    onPressed: () {
+                      print('클릭됨');
+                    }),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-}
-
-class MyClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.moveTo(0, size.height);
-    path.lineTo(size.width / 2, 0.0);
-    path.lineTo(size.width, size.height);
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
-    return true;
   }
 }
