@@ -24,50 +24,72 @@ class _FirstAppState extends State<FirstApp> {
       ),
       home: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            leading: Icon(Icons.arrow_back),
-            title: Text(
-              'Credit Card',
-              style: TextStyle(
-                fontWeight: FontWeight.w800,
-                fontSize: 25,
-                fontFamily: 'Roboto',
-              ),
-            ),
-            centerTitle: true,
-            actions: [
-              Row(
-                children: [
-                  Icon(FlutterIcons.shoppingcart_ant),
-                  SizedBox(width: 10),
-                ],
-              )
-            ],
-          ),
-          body: Column(
+          resizeToAvoidBottomInset: true,
+          body: Stack(
             children: [
-              RaisedButton(
-                  child: Text('인증하기'),
-                  onPressed: () {
-                    print('클릭됨');
-                    setState(() {
-                      // 데이터에 연관이 있는 위젯은 다시 그려라.
-                      isChecked = false;
-                    });
-                  }),
-              AbsorbPointer(
-                absorbing: isChecked,
-                child: RaisedButton(
-                    child: Text('전송하기'),
-                    onPressed: () {
-                      print('클릭post commit');
-                    }),
+              Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(200),
+                        bottomRight: Radius.circular(200)),
+                    child: Container(
+                      alignment: Alignment(0, -0.5),
+                      child: Text(
+                        'Would you begin',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 50,
+                        ),
+                      ),
+                      color: Colors.blue,
+                      height: 350,
+                    ),
+                  ),
+                  Expanded(child: SizedBox()),
+                ],
               ),
+              Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  height: 200,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        buildTextFormField("Username"),
+                        buildTextFormField("Password"),
+                      ],
+                    ),
+                  )),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  TextFormField buildTextFormField(String hint) {
+    return TextFormField(
+      decoration: InputDecoration(
+          hintText: hint,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.black),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.black),
+          ),
+          fillColor: Colors.grey[300],
+          filled: true),
+    );
+  }
+
+  ListView buildListView() {
+    return ListView(
+      children: [
+        TextFormField(),
+      ],
     );
   }
 }
