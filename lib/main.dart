@@ -19,55 +19,13 @@ class _FirstAppState extends State<FirstApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.white,
-      ),
-      home: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            elevation: 0,
-            leading: Icon(Icons.arrow_back),
-            title: Text(
-              'Credit Card',
-              style: TextStyle(
-                fontWeight: FontWeight.w800,
-                fontSize: 25,
-                fontFamily: 'Roboto',
-              ),
-            ),
-            centerTitle: true,
-            actions: [
-              Row(
-                children: [
-                  Icon(FlutterIcons.shoppingcart_ant),
-                  SizedBox(width: 10),
-                ],
-              )
-            ],
-          ),
-          body: Column(
-            children: [
-              RaisedButton(
-                  child: Text('인증하기'),
-                  onPressed: () {
-                    print('클릭됨');
-                    setState(() {
-                      // 데이터에 연관이 있는 위젯은 다시 그려라.
-                      isChecked = false;
-                    });
-                  }),
-              AbsorbPointer(
-                absorbing: isChecked,
-                child: RaisedButton(
-                    child: Text('전송하기'),
-                    onPressed: () {
-                      print('클릭post commit');
-                    }),
-              ),
-            ],
-          ),
+        theme: ThemeData(
+          primaryColor: Colors.white,
         ),
-      ),
-    );
+        home: Center(
+          child: Scaffold(
+            body: Center(child: AlertDialog(child: Text('안녕'))),
+          ),
+        ));
   }
 }
